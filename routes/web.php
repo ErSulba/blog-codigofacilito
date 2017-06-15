@@ -16,7 +16,7 @@ Route::get('/', function () {
         
 });
 
-Route::get('/articles', function (){
+/*Route::get('/articles', function (){
     echo "esta es la seccion de articulos";
 });
 
@@ -26,4 +26,9 @@ Route::group(['prefix' => 'articles'], function(){
 		'uses' => 'TestController@view',
 		'as' =>  'articlesView'
 	]);
+});*/
+
+Route::group(['prefix' => 'admin'], function (){
+    Route::resource('users', 'UsersController');
+
 });
