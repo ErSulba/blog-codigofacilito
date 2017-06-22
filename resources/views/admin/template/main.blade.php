@@ -13,10 +13,13 @@
             <div class="panel-heading">
                 <h3 class="panel-heading container">@yield('title')</h3>
             </div>
-            <div class="panel-body">
-                @include('flash::message')
-                @yield('content')
-            </div>
+                <div class="panel-body">
+                    <div class="container">
+                        @include('flash::message')
+                        @include('admin.template.partials.errors')
+                        @yield('content')
+                    </div>
+                </div>
         </div>
     </section>
 
