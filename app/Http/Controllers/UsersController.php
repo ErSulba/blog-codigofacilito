@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 use Laracasts\Flash\Flash;
+use App\Http\Requests\UserRequest;
 
 class UsersController extends Controller
 {
@@ -36,7 +37,7 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
        $user = new User($request->all());
        $user->password = bcrypt($request->password);
@@ -67,7 +68,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        dd($user);
+        return view('admin.users.edit')->with('user', $user);
     }
 
     /**
@@ -79,7 +80,14 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->type = $request->type;
+        $user->save();
+
+        flash('El usuario '.$user->name.' se ha editado con exito')->success()->important();
+        return redirect()->route('users.index');
     }
 
     /**
