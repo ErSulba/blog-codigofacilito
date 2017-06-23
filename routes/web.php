@@ -35,6 +35,22 @@ Route::group(['prefix' => 'admin'], function (){
 	    'as'    =>  'users.destroy'
     ]);
 
+	Route::get('auth/login', [
+		'uses'  => 'Auth\LoginController@showLoginForm',
+		'as'    => 'auth.login'
+	]);
+
+	Route::post('auth/login', [
+		'uses'  => 'Auth\LoginController@login',
+		'as'    => 'auth.login'
+	]);
+
+	Route::get('auth/logout', [
+		'uses'  => 'Auth\LoginController@logout',
+		'as'    => 'auth.logout'
+	]);
+
+
 	Route::resource('categories', 'CategoriesController');
 	Route::get('categories/{id}/destroy', [
 			'uses'  =>  'CategoriesController@destroy',
@@ -42,3 +58,25 @@ Route::group(['prefix' => 'admin'], function (){
 		]);
 
 });
+/*Auth::routes();
+*/
+
+/*Route::get('admin/auth/login', [
+	'uses'  => 'Auth\LoginController@showLoginForm',
+	'as'    => 'admin.auth.login'
+]);
+
+Route::post('admin/auth/login', [
+	'uses'  => 'Auth\LoginController@login',
+	'as'    => 'admin.auth.login'
+]);
+
+Route::get('admin/auth/logout', [
+	'uses'  => 'Auth\LoginController@logout',
+	'as'    => 'admin.auth.logout'
+]);*/
+
+
+
+
+Route::get('/home', 'HomeController@index')->name('home');
